@@ -1,0 +1,2 @@
+﻿SELECT *
+FROM #TEMP_TABLE;

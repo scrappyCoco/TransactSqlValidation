@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3DE1C1B1-28FA-4195-A12B-4E68FF8AC618}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Coding4fun.TransactSql.Validations</RootNamespace>
+    <AssemblyName>Coding4fun.TransactSql.Validations</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug Visual Studio|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>MyRefKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BuildContributors\ConfigLoaderBuildContributor.cs" />
+    <Compile Include="ExtendedKeywords.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\SqlObjectExtensions.cs" />
+    <Compile Include="LocalizedExportCodeAnalysisRuleAttribute.cs" />
+    <Compile Include="NamingRuleParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuleCategories.cs" />
+    <Compile Include="RuleCodes.cs" />
+    <Compile Include="RuleResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RuleResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Rules\StringLiteralRule.cs" />
+    <Compile Include="Rules\NotDeterministicSelectRule.cs" />
+    <Compile Include="Rules\ObjectNameRule.cs" />
+    <Compile Include="Rules\SchemaRequireRule.cs" />
+    <Compile Include="Rules\SqlCodeAnalysisRuleBase.cs" />
+    <Compile Include="Rules\TableDescriptionRule.cs" />
+    <Compile Include="ValidationResult.cs" />
+    <Compile Include="ValidationResults\ObjectNameValidationResult.cs" />
+    <Compile Include="ValidationResults\SchemaRequireValidationResult.cs" />
+    <Compile Include="ValidationResults\TableDescriptionValidationResult.cs" />
+    <Compile Include="Visitors\StringLiteralVisitor.cs" />
+    <Compile Include="Visitors\NotDeterministicSelectVisitor.cs" />
+    <Compile Include="Visitors\ObjectNameContext.cs" />
+    <Compile Include="Visitors\ObjectNameVisitor.cs" />
+    <Compile Include="Visitors\SchemaRequireVisitor.cs" />
+    <Compile Include="Visitors\SqlVisitorBase.cs" />
+    <Compile Include="Visitors\TableDescriptionVisitor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RuleResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RuleResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MyRefKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SqlServer.DacFx" Version="150.5282.3" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,2 @@
+﻿SELECT C
+FROM dbo.T;

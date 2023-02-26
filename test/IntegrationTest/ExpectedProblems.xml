@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Problems>
+  <Problem>
+    <Rule>Coding4fun.SR1001</Rule>
+    <ProblemDescription>'MixСлов' has invalid value</ProblemDescription>
+    <SourceFile>ExampleSqlProject\dbo\Stored Procedures\InvalidIdentifierPath.sql</SourceFile>
+    <Line>6</Line>
+    <Column>33</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Coding4fun.SR1002</Rule>
+    <ProblemDescription>Object name has to include [schema_name] and [object_name], but was: MY_TABLE</ProblemDescription>
+    <SourceFile>ExampleSqlProject\dbo\Stored Procedures\InvalidIdentifierPath.sql</SourceFile>
+    <Line>13</Line>
+    <Column>19</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Coding4fun.SR1003</Rule>
+    <ProblemDescription>Object name 'TableWithInvalidНейм' doesn't match the pattern: '^(\[{Schema}\]\.\[MY_[A-Z][A-Z0-9]*(_[A-Z0-9])*?\]|\[import\].+)$'</ProblemDescription>
+    <SourceFile>ExampleSqlProject\dbo\Tables\TableWithInvalidНейм.sql</SourceFile>
+    <Line>1</Line>
+    <Column>20</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Coding4fun.SR1003</Rule>
+    <ProblemDescription>Object name 'Id' doesn't match the pattern: '^(\[{Schema}\]\.\[{Table}\]\.\[{Table}_[A-Z][A-Z0-9]*(_[A-Z0-9])*?\]|\[import\].+)$'</ProblemDescription>
+    <SourceFile>ExampleSqlProject\dbo\Tables\TableWithInvalidНейм.sql</SourceFile>
+    <Line>3</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Coding4fun.SR1004</Rule>
+    <ProblemDescription>Table 'TableWithInvalidНейм' doesn't contain a description</ProblemDescription>
+    <SourceFile>ExampleSqlProject\dbo\Tables\TableWithInvalidНейм.sql</SourceFile>
+    <Line>1</Line>
+    <Column>20</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Coding4fun.SR1004</Rule>
+    <ProblemDescription>Column 'Id' doesn't contain a description</ProblemDescription>
+    <SourceFile>ExampleSqlProject\dbo\Tables\TableWithInvalidНейм.sql</SourceFile>
+    <Line>3</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Coding4fun.SR1004</Rule>
+    <ProblemDescription>Table 'Поставщик' doesn't contain a description</ProblemDescription>
+    <SourceFile>ExampleSqlProject\import\Tables\Поставщик.sql</SourceFile>
+    <Line>1</Line>
+    <Column>23</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Coding4fun.SR1004</Rule>
+    <ProblemDescription>Column 'Идентификатор' doesn't contain a description</ProblemDescription>
+    <SourceFile>ExampleSqlProject\import\Tables\Поставщик.sql</SourceFile>
+    <Line>3</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+  <Problem>
+    <Rule>Coding4fun.SR1004</Rule>
+    <ProblemDescription>Column 'Дата' doesn't contain a description</ProblemDescription>
+    <SourceFile>ExampleSqlProject\import\Tables\Поставщик.sql</SourceFile>
+    <Line>4</Line>
+    <Column>5</Column>
+    <Severity>Warning</Severity>
+  </Problem>
+</Problems>
