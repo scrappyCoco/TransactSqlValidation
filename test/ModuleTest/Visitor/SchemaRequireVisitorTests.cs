@@ -2,7 +2,7 @@
 using Coding4fun.TransactSql.Validations.Visitors;
 using Xunit;
 
-namespace Coding4fun.TransactSql.ModuleTest
+namespace Coding4fun.TransactSql.ModuleTest.Visitor
 {
     public class SchemaRequireVisitorTests : VisitorTestBase<SchemaRequireVisitor>
     {
