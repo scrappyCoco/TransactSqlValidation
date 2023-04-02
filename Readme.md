@@ -3,19 +3,19 @@
 Данный проект может оказаться полезным компаниям, которые используют [SQL Server Data Tools](https://visualstudio.microsoft.com/vs/features/ssdt/).
 По мере разрастания проекта, появляются некоторые требования к стилю написания кода.
 Чтобы не тратить много времени на проверку этих требований при проведении code review, хочется иметь инструмент, проводящий автоматическую проверку этих правил.
-В проекте sqlproj имеется механизм по проверке кода. Из "коробки" поставляются некоторые [правила](https://learn.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/dd172133(v=vs.100)).
+В проекте sqlproj имеется механизм проверки кода. Из "коробки" поставляются некоторые [правила](https://learn.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/dd172133(v=vs.100)).
 Но нам их не достаточно - мы написали свои, согласно нашим требованиям. Рекомендуется ознакомиться с написанием собственных правил в [первоисточнике](https://learn.microsoft.com/en-us/sql/ssdt/overview-of-extensibility-for-database-code-analysis-rules?view=sql-server-ver16).
 
 ## Проверки
 
 ### Coding4fun.SR1001: String literal validation
 
-Проверка значения на соответствие регулярному выражению во всех строковых литералах, используемых в функциях, процедурах и триггерах. Если строка соответствует регулярное выражение, то случится ошибка.
-Что бы предотвратить сочетание кириллицы и латиницы в конфигурацию необходимо включить в файл проекта:
+Проверка значения на соответствие регулярному выражению во всех строковых литералах, используемых в функциях, процедурах и триггерах. Если строка соответствует регулярному выражению, то случится ошибка.
+Чтобы предотвратить сочетание кириллицы и латиницы необходимо заполнить конфигурацию в файл проекта:
 ```
 <ContributorArguments>
   $(ContributorArguments);
-  Coding4fun.StringLiteral.InvalidPattern = ([а-яА-ЯёЁ][a-zA-Z])|([a-zA-Z][а-яА-ЯёЁ]);
+  Coding4fun.StringLiteral.InvalidPattern = (?i:[а-яё][a-z])|([a-z][а-яё]));
 </ContributorArguments>
 ```
 
@@ -73,7 +73,7 @@ Coding4fun.ObjectName.Function                            = ^\[{Schema}\]\.\[{La
   </PropertyGroup>
 ```
 
-В блоке `BuildContributors` происходит объявление инициализатора конфигурации `ConfigLoaderBuildContributor`, котор считывает `ContributorArguments`.
+В блоке `BuildContributors` происходит объявление инициализатора конфигурации `ConfigLoaderBuildContributor`, который считывает `ContributorArguments`.
 `ConfigLoaderBuildContributor` запускается после построения проекта. Блок `ContributorArguments` состоит из списка пар `<название_параметра> = <значение>;`.
 `<название_параметра>` должно начинаться с префикса `Coding4fun.ObjectName.` + `<название_переменной> | <тип_объекта>`.
 Переменные создаются для дальнейшего использования в значении `<тип_объекта>`. В значении указывается регулярное выражение.
@@ -89,11 +89,7 @@ CREATE TABLE dbo.MY_TABLE
 
 При валидации наименования таблицы будет сформирован логический путь к проверяемому объекту: `[dbo].[MY_TABLE]`
 
-При валидации правилом:
-```
-Coding4fun.ObjectName.Table = ^\[{Schema}\]\.\[MY_{LATIN_UPPER_CASE}\]$;
-```
-Произойдет подстановка переменных контекста и регулярное выражение примет следующий вид: `^\[dbo\]\.\[MY_[A-Z][A-Z0-9]*(_[A-Z0-9])*?\]$`,
+При валидации правилом `Coding4fun.ObjectName.Table = ^\[{Schema}\]\.\[MY_{LATIN_UPPER_CASE}\]$;` произойдет подстановка переменных контекста и регулярное выражение примет следующий вид: `^\[dbo\]\.\[MY_[A-Z][A-Z0-9]*(_[A-Z0-9])*?\]$`,
 что в свою очередь означает: любая таблица должна начинаться с префикса `MY_` (в верхнем регистре) и за ним следует название в `UPPER_CASE`.
 Если регулярное выражение не совпадет с названием таблицы, то будет сгенерирована ошибка (либо предупреждение).
 
@@ -151,9 +147,9 @@ Coding4fun.ObjectName.BTreeNonUniqueNonClusteredIndex = ^\[{Schema}\]\.\[{Table}
 
 ### Coding4fun.SR1004: Check for documentation existence
 
-Хорошо, когда есть документация на таблицу и плохо когда её нет. Там давайте сделаем хорошо!
+Хорошо, когда есть документация на таблицу и плохо когда её нет. Так давайте сделаем хорошо!
 
-Хороший пример:
+Пример таблицы, у которой имеется описание:
 ```sql
 CREATE TABLE [dbo].[MY_TABLE](
     [MY_TABLE_ID]    INT NOT NULL,
@@ -181,8 +177,7 @@ EXEC sp_addextendedproperty
 GO
 ```
 
-Если будет отсутствовать описания для таблицы, либо для одного из столбцов, то будет сгенерирована ошибка.
-
+Если будут отсутствовать документация на какой-либо столбец, либо на саму таблицу, то будет выведена ошибка.
 ### Coding4fun.SR1005: TOP (N) requires ORDER BY clause
 
 Согласно [рекомендациям от Microsoft](https://learn.microsoft.com/en-us/sql/t-sql/queries/top-transact-sql?view=sql-server-ver16), при использовании `TOP` необходимо писать `ORDER BY`:
@@ -194,7 +189,7 @@ SELECT TOP (10) *
 FROM dbo.MY_TABLE;
 ```
 
-Как хотелось бы:
+Как надо:
 ```sql
 SELECT TOP (10) *
 FROM dbo.MY_TABLE
@@ -216,7 +211,7 @@ ORDER BY MY_TABLE_COLUMN_1,
 
 ### Validation
 
-Основной проект, ради которого всё затевалось. В нём реализованы правила проверки TSQL, описанные в начала этого описания.
+Основной проект, ради которого всё затевалось. В нём реализованы правила проверки TSQL, указанные в начала этого описания.
 Dll файл, полученный в результате компиляции должен быть скопирован в строго определенную папку:
 ```
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\150
@@ -246,26 +241,25 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\Ext
   </PropertyGroup>
 ```
 
+Для компиляции данного проекта необходимо один раз [создать ключ MyRefKey.snk](https://learn.microsoft.com/en-us/sql/ssdt/walkthrough-author-custom-static-code-analysis-rule-assembly?view=sql-server-ver16#building-the-class-library).
+
 
 ### Benchmark
 
 `SingleRuleValidation` производит замер производительности каждого правила по отдельности.
 `VendorValidation` производит замер производительности всех встроенных правил Microsoft и отдельно все правила Coding4fun.
+На вход необходимо подавать файл dacpac вашего проекта.
 
 ### ExampleSqlProject
 
 SQL-проект, в котором есть попахивающий код. При анализе этого проекта будут отображены ошибки, найденные проектом `Validation`.
-Также этот проект используется в `IntegrationTest` и в `Benchmark`.
+Также этот проект используется в `Benchmark`.
 
 ### ModuleTest
 
 Используется классов, унаследованных от [TSqlFragmentVisitor](https://learn.microsoft.com/en-us/dotnet/api/microsoft.sqlserver.transactsql.scriptdom.tsqlfragmentvisitor?view=sql-dacfx-161)
 Модульный тест более легковесный, но в нём не доступна семантическая модель.
 По возможности, большую часть тестов лучше разрабатывать именно в этом проекте.
-
-### IntegrationTest
-
-Зависит от `ExampleSqlProject` (загружает dacpack). В отличие от `ModuleTest` в данном проекте имеется семантическая модель.
 
 ## Примечания
 

@@ -135,8 +135,8 @@
     <value>'{0}' has invalid value</value>
   </data>
     <data name="StringLiteral_RuleName" xml:space="preserve">
-    <value>String literal validation</value>
-  </data>
+        <value>String validation</value>
+    </data>
     <data name="ObjectName_RuleName" xml:space="preserve">
       <value>Validation of object name format</value>
   </data>
