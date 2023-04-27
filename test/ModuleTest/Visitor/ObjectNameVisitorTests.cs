@@ -9,7 +9,7 @@ using Coding4fun.TransactSql.Validations.Visitors;
 using Xunit;
 using Result = Coding4fun.TransactSql.Validations.ValidationResults.ObjectNameValidationResult;
 
-namespace Coding4fun.TransactSql.ModuleTest
+namespace Coding4fun.TransactSql.ModuleTest.Visitor
 {
     public class ObjectNameVisitorTests : VisitorTestBase<ObjectNameVisitor>
     {

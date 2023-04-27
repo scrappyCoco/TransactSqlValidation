@@ -86,39 +86,39 @@
     <RunSqlCodeAnalysis>True</RunSqlCodeAnalysis>
     <TreatTSqlWarningsAsErrors>True</TreatTSqlWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <SqlCodeAnalysisRules>-!Microsoft.Rules.Data.SR0001;-!Microsoft.Rules.Data.SR0004;-!Microsoft.Rules.Data.SR0005;-!Microsoft.Rules.Data.SR0006;-Microsoft.Rules.Data.SR0007;-!Microsoft.Rules.Data.SR0008;-!Microsoft.Rules.Data.SR0009;-!Microsoft.Rules.Data.SR0010;-!Microsoft.Rules.Data.SR0011;-!Microsoft.Rules.Data.SR0012;-!Microsoft.Rules.Data.SR0013;-!Microsoft.Rules.Data.SR0014;-!Microsoft.Rules.Data.SR0015;-!Microsoft.Rules.Data.SR0016</SqlCodeAnalysisRules>
+    <SqlCodeAnalysisRules>+!Coding4fun.SR1001;-Coding4fun.SR1002;-Coding4fun.SR1003;-Coding4fun.SR1004;-Coding4fun.SR1005;-!Microsoft.Rules.Data.SR0001;-!Microsoft.Rules.Data.SR0004;-!Microsoft.Rules.Data.SR0005;-!Microsoft.Rules.Data.SR0006;-Microsoft.Rules.Data.SR0007;-!Microsoft.Rules.Data.SR0008;-!Microsoft.Rules.Data.SR0009;-!Microsoft.Rules.Data.SR0010;-!Microsoft.Rules.Data.SR0011;-!Microsoft.Rules.Data.SR0012;-!Microsoft.Rules.Data.SR0013;-!Microsoft.Rules.Data.SR0014;-!Microsoft.Rules.Data.SR0015;-!Microsoft.Rules.Data.SR0016</SqlCodeAnalysisRules>
   </PropertyGroup>
   <PropertyGroup>
     <BuildContributors>
-            $(BuildContributors);Coding4fun.ConfigLoaderBuildContributor
-        </BuildContributors>
+      $(BuildContributors);Coding4fun.ConfigLoaderBuildContributor
+    </BuildContributors>
     <ContributorArguments>
-            $(ContributorArguments);
-            Coding4fun.ObjectName.LATIN_UPPER_CASE                = [A-Z][A-Z0-9]*(_[A-Z0-9])*?;
-            Coding4fun.ObjectName.latin_lower_case                = [a-z][a-z0-9]*(_[a-z0-9])*?;
-            Coding4fun.ObjectName.LatinPascalCase                 = [A-Z][A-Za-z0-9]*?;
-            Coding4fun.ObjectName.latinCamelCase                  = [a-z][a-z0-9]*([A-Z]+[a-z0-9]+)*?;
-            Coding4fun.ObjectName.Table                           = ^(\[{Schema}\]\.\[MY_{LATIN_UPPER_CASE}\]|\[import\].+)$;
-            Coding4fun.ObjectName.Column                          = ^(\[{Schema}\]\.\[{Table}\]\.\[{Table}_{LATIN_UPPER_CASE}\]|\[import\].+)$;
-            Coding4fun.ObjectName.DefaultConstraint               = ^\[{Schema}\]\.\[{Table}\]\.\[{Column}\]\.\[DF_{Column}\]$;
-            Coding4fun.ObjectName.PrimaryKeyConstraint            = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[PK_{Table}\]$;
-            Coding4fun.ObjectName.UniqueConstraint                = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[UN_{Table}_{LATIN_UPPER_CASE}\]$;
-            Coding4fun.ObjectName.CheckConstraint                 = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[CH_{Table}_{LATIN_UPPER_CASE}\]$;
-            Coding4fun.ObjectName.BTreeNonUniqueClusteredIndex    = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[IX_{Table}_{LATIN_UPPER_CASE}\]$;
-            Coding4fun.ObjectName.BTreeUniqueClusteredIndex       = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[IX_{Table}_{LATIN_UPPER_CASE}\]$;
-            Coding4fun.ObjectName.BTreeNonUniqueNonClusteredIndex = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[IX_{Table}_{LATIN_UPPER_CASE}\]$;
-            Coding4fun.ObjectName.BTreeUniqueNonClusteredIndex    = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[IX_{Table}_{LATIN_UPPER_CASE}\]$;
-            Coding4fun.ObjectName.ClusteredColumnStoreIndex       = ^\[{Schema}\]\.\[{Table}\]\.\[CS_{Table}_{LATIN_UPPER_CASE}\]$;
-            Coding4fun.ObjectName.NonClusteredColumnStoreIndex    = ^\[{Schema}\]\.\[{Table}\]\.\[CS_{Table}_{LATIN_UPPER_CASE}\]$;
-            Coding4fun.ObjectName.Procedure                       = ^\[{Schema}\]\.\[{LatinPascalCase}\]$;
-            Coding4fun.ObjectName.RoutineParameter                = ^\[{Schema}\]\.\[{LatinPascalCase}\]\.\[@{LatinPascalCase}\]$;
-            Coding4fun.ObjectName.Variable                        = ^\[{Schema}\]\.\[{LatinPascalCase}\]\.\[@{latinCamelCase}\]$;
-            Coding4fun.ObjectName.Function                        = ^\[{Schema}\]\.\[{LatinPascalCase}\]$;
-            Coding4fun.StringLiteral.InvalidPattern               = ([а-яА-ЯёЁ][a-zA-Z])|([a-zA-Z][а-яА-ЯёЁ]);
-        </ContributorArguments>
+      $(ContributorArguments);
+      Coding4fun.ObjectName.LATIN_UPPER_CASE                = [A-Z][A-Z0-9]*(_[A-Z0-9])*?;
+      Coding4fun.ObjectName.latin_lower_case                = [a-z][a-z0-9]*(_[a-z0-9])*?;
+      Coding4fun.ObjectName.LatinPascalCase                 = [A-Z][A-Za-z0-9]*?;
+      Coding4fun.ObjectName.latinCamelCase                  = [a-z][a-z0-9]*([A-Z]+[a-z0-9]+)*?;
+      Coding4fun.ObjectName.Table                           = ^(\[{Schema}\]\.\[MY_{LATIN_UPPER_CASE}\]|\[import\].+)$;
+      Coding4fun.ObjectName.Column                          = ^(\[{Schema}\]\.\[{Table}\]\.\[{Table}_{LATIN_UPPER_CASE}\]|\[import\].+)$;
+      Coding4fun.ObjectName.DefaultConstraint               = ^\[{Schema}\]\.\[{Table}\]\.\[{Column}\]\.\[DF_{Column}\]$;
+      Coding4fun.ObjectName.PrimaryKeyConstraint            = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[PK_{Table}\]$;
+      Coding4fun.ObjectName.UniqueConstraint                = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[UN_{Table}_{LATIN_UPPER_CASE}\]$;
+      Coding4fun.ObjectName.CheckConstraint                 = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[CH_{Table}_{LATIN_UPPER_CASE}\]$;
+      Coding4fun.ObjectName.BTreeNonUniqueClusteredIndex    = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[IX_{Table}_{LATIN_UPPER_CASE}\]$;
+      Coding4fun.ObjectName.BTreeUniqueClusteredIndex       = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[IX_{Table}_{LATIN_UPPER_CASE}\]$;
+      Coding4fun.ObjectName.BTreeNonUniqueNonClusteredIndex = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[IX_{Table}_{LATIN_UPPER_CASE}\]$;
+      Coding4fun.ObjectName.BTreeUniqueNonClusteredIndex    = ^\[{Schema}\]\.\[{Table}\]\.(\[{Column}\]\.)?\[IX_{Table}_{LATIN_UPPER_CASE}\]$;
+      Coding4fun.ObjectName.ClusteredColumnStoreIndex       = ^\[{Schema}\]\.\[{Table}\]\.\[CS_{Table}_{LATIN_UPPER_CASE}\]$;
+      Coding4fun.ObjectName.NonClusteredColumnStoreIndex    = ^\[{Schema}\]\.\[{Table}\]\.\[CS_{Table}_{LATIN_UPPER_CASE}\]$;
+      Coding4fun.ObjectName.Procedure                       = ^\[{Schema}\]\.\[{LatinPascalCase}\]$;
+      Coding4fun.ObjectName.RoutineParameter                = ^\[{Schema}\]\.\[{LatinPascalCase}\]\.\[@{LatinPascalCase}\]$;
+      Coding4fun.ObjectName.Variable                        = ^\[{Schema}\]\.\[{LatinPascalCase}\]\.\[@{latinCamelCase}\]$;
+      Coding4fun.ObjectName.Function                        = ^\[{Schema}\]\.\[{LatinPascalCase}\]$;
+      Coding4fun.StringLiteral.InvalidPattern               = ([а-яА-ЯёЁ][a-zA-Z])|([a-zA-Z][а-яА-ЯёЁ]);
+    </ContributorArguments>
     <StaticCodeAnalysisDependsOn>
-            $(StaticCodeAnalysisDependsOn);Build;
-        </StaticCodeAnalysisDependsOn>
+      $(StaticCodeAnalysisDependsOn);Build;
+    </StaticCodeAnalysisDependsOn>
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>

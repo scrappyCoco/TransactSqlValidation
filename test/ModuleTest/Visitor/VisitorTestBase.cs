@@ -10,7 +10,7 @@ using Coding4fun.TransactSql.Validations.Visitors;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 using Xunit;
 
-namespace Coding4fun.TransactSql.ModuleTest
+namespace Coding4fun.TransactSql.ModuleTest.Visitor
 {
     /// <summary>
     ///     Базовый класс для тетсирования visitor.
@@ -23,7 +23,7 @@ namespace Coding4fun.TransactSql.ModuleTest
         /// </summary>
         protected class TestBuilder
         {
-            private const string TestData = @".\TestData";
+            private const string TestData = @".\TestData\Visitor";
             private readonly string _testFilePath;
             private readonly TVisitor _visitor;
 
