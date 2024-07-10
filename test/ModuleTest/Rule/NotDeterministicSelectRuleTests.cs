@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Coding4Fun.TransactSql.ModuleTest.Rule;
 
-public class TableDescriptionRuleTests : RuleTestBase<TableDescriptionRule>
+public class NotDeterministicSelectRuleTests : RuleTestBase<NotDeterministicSelectRule>
 {
     [Theory]
-    [TestDirectory(@$".\TestData\Rule\{nameof(TableDescriptionRule)}")]
+    [TestDirectory(@$".\TestData\Rule\{nameof(NotDeterministicSelectRule)}")]
     public void File(string testFileName) => TestFile(testFileName);
 }

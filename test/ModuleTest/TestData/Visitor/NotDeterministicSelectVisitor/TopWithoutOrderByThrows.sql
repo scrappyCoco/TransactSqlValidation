@@ -1,2 +1,0 @@
-﻿SELECT TOP (1) *
-FROM #T

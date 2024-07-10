@@ -1,2 +1,0 @@
-﻿SELECT C
-FROM MY_TABLE

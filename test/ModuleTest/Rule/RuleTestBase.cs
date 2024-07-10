@@ -2,54 +2,81 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using Microsoft.SqlServer.Dac.CodeAnalysis;
 using Microsoft.SqlServer.Dac.Model;
 using Xunit;
 
-namespace Coding4fun.TransactSql.ModuleTest.Rule
+namespace Coding4Fun.TransactSql.ModuleTest.Rule;
+
+public abstract class RuleTestBase<TRule> where TRule : SqlCodeAnalysisRule, new()
 {
-    public abstract class RuleTestBase<TRule> where TRule : SqlCodeAnalysisRule
+    private readonly Regex _expectedCommentRegex = new(@"-- Expected error message: (?<message>[^\r\n]+)",
+        RegexOptions.Compiled | RegexOptions.Multiline);
+
+    protected void TestInvalidCode([CallerMemberName] string methodName = null)
     {
-        private readonly Regex _expectedCommentRegex = new Regex(@"-- Expected error message: (?<message>[^\r\n]+)",
-            RegexOptions.Compiled | RegexOptions.Multiline);
+        HashSet<string> actualErrorMessages = GetErrorMessages(methodName, out string sqlFileContent);
 
-        protected void TestInvalidCode([CallerMemberName] string methodName = null)
-        {
-            HashSet<string> actualErrorMessages = GetErrorMessages(methodName, out string sqlFileContent);
+        HashSet<string> expectedErrorMessages = _expectedCommentRegex.Matches(sqlFileContent)
+            .Select(match => match.Groups["message"].Value.Trim())
+            .ToHashSet();
 
-            HashSet<string> expectedErrorMessages = _expectedCommentRegex.Matches(sqlFileContent)
-                .Cast<Match>()
-                .Select(match => match.Groups["message"].Value)
-                .ToHashSet();
+        Assert.True(expectedErrorMessages.SetEquals(actualErrorMessages));
+    }
+    
+    protected void TestFile(string testFileName)
+    {
+        HashSet<string> actualErrorMessages = GetErrorMessages(Path.GetFileNameWithoutExtension(testFileName), out string sqlFileContent);
 
-            Assert.True(expectedErrorMessages.SetEquals(actualErrorMessages));
-        }
+        HashSet<string> expectedErrorMessages = _expectedCommentRegex.Matches(sqlFileContent)
+            .Select(match => match.Groups["message"].Value.Trim())
+            .ToHashSet();
 
-        protected void TestValidCode([CallerMemberName] string methodName = null)
-        {
-            HashSet<string> actualErrorMessages = GetErrorMessages(methodName, out string sqlFileContent);
-            Assert.Empty(actualErrorMessages);
-        }
+        Assert.True(expectedErrorMessages.SetEquals(actualErrorMessages), "Expected error messages differ with actual.");
+    }
 
-        private HashSet<string> GetErrorMessages(string methodName, out string sqlFileContent)
-        {
-            string sqlFilePath = @$".\TestData\Rule\{typeof(TRule).Name}\{methodName}.sql";
-            sqlFileContent = File.ReadAllText(sqlFilePath);
+    protected void TestValidCode([CallerMemberName] string methodName = null)
+    {
+        HashSet<string> actualErrorMessages = GetErrorMessages(methodName, out string sqlFileContent);
+        Assert.Empty(actualErrorMessages);
+    }
 
-            TSqlModel sqlModel = new TSqlModel(SqlServerVersion.Sql150, new TSqlModelOptions());
-            sqlModel.AddOrUpdateObjects(sqlFileContent, methodName, new TSqlObjectOptions());
+    private HashSet<string> GetErrorMessages(string methodName, out string sqlFileContent)
+    {
+        string sqlFilePath = @$".\TestData\Rule\{typeof(TRule).Name}\{methodName}.sql";
+        sqlFileContent = File.ReadAllText(sqlFilePath);
 
-            CodeAnalysisResult codeAnalysisResult = new CodeAnalysisServiceFactory()
-                .CreateAnalysisService(sqlModel)
-                .Analyze(sqlModel);
+        TSqlModel sqlModel = new TSqlModel(SqlServerVersion.Sql160, new TSqlModelOptions());
+        TSqlObjectOptions sqlObjectOptions = new();
+        sqlModel.AddOrUpdateObjects(sqlFileContent, methodName, sqlObjectOptions);
+        sqlModel.AddOrUpdateObjects(
+            File.ReadAllText(@".\TestData\SqlAnalysisConfiguration.sql"),
+            "SqlAnalysisConfiguration",
+            sqlObjectOptions);
 
-            HashSet<string> actualErrorMessages = codeAnalysisResult.Problems
-                .Select(problem => problem.ErrorMessageString)
-                .ToHashSet(StringComparer.Ordinal);
+        string testRuleId = typeof(TRule).GetCustomAttribute<ExportCodeAnalysisRuleAttribute>()!.Id;
 
-            return actualErrorMessages;
-        }
+        RuleConfiguration[] coding4FunRules = typeof(TRule).Assembly.GetExportedTypes()
+            .Where(type => type.GetCustomAttribute<ExportCodeAnalysisRuleAttribute>() != null)
+            .Select(rule => rule.GetCustomAttribute<ExportCodeAnalysisRuleAttribute>().Id)
+            .Select(ruleId =>
+                new RuleConfiguration(ruleId, enabled: ruleId == testRuleId, SqlRuleProblemSeverity.Error))
+            .ToArray();
+
+        CodeAnalysisResult codeAnalysisResult = new CodeAnalysisServiceFactory()
+            .CreateAnalysisService(sqlModel, new CodeAnalysisServiceSettings
+            {
+                RuleSettings = new CodeAnalysisRuleSettings(coding4FunRules)
+            })
+            .Analyze(sqlModel);
+
+        HashSet<string> actualErrorMessages = codeAnalysisResult.Problems
+            .Select(problem => problem.ErrorMessageString)
+            .ToHashSet(StringComparer.Ordinal);
+
+        return actualErrorMessages;
     }
 }

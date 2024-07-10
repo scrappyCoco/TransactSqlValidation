@@ -1,0 +1,18 @@
+{
+  "xml.fileAssociations": [
+    {
+      "pattern": "**.nuspec",
+      "systemId": "https://raw.githubusercontent.com/NuGet/NuGet.Client/dev/src/NuGet.Core/NuGet.Packaging/compiler/resources/nuspec.xsd"
+    }
+  ],
+  "cSpell.words": [
+    "apos",
+    "Browsable",
+    "Ctes",
+    "msdata",
+    "NVARCHAR",
+    "resheader",
+    "sqlproj",
+    "xunit"
+  ]
+}
