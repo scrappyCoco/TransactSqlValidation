@@ -13,7 +13,7 @@ namespace Coding4Fun.TransactSql.ModuleTest;
 
 public class RuleTests
 {
-    private const string TestDataRoot = @".\TestData\Rule\";
+    private const string TestDataRoot = @"TestData\Rule\";
 
     /// <summary>
     /// Searching for message with expected error message inside a test file.
