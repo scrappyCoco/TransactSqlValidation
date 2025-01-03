@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[InvalidIdentifierPath] @param1 int = 0,
+﻿CREATE PROCEDURE [dbo].[sp_InvalidIdentifierPath] @param1 int = 0,
                                                @param2 int
 AS
 BEGIN

@@ -1,3 +1,0 @@
-﻿DELETE l
-FROM dbo.MY_TABLE AS l
-WHERE rn = 1

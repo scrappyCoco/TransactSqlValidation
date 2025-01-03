@@ -1,0 +1,5 @@
+﻿CREATE PROCEDURE dbo.LatinOnlyDoesNotThrow
+AS
+BEGIN
+    DECLARE @str NVARCHAR(100) = N'Latin';
+END

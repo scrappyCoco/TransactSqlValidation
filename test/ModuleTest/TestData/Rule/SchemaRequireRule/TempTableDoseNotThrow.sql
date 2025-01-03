@@ -1,0 +1,6 @@
+﻿CREATE PROCEDURE dbo.TempTableDoseNotThrow
+AS
+BEGIN
+    SELECT C
+    FROM #TEMP_TABLE;
+END
