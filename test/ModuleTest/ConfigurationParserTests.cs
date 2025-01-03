@@ -35,7 +35,7 @@ public class ConfigurationParserTests
         ];
         const string expectedInvalidWordMixPattern = "([а-яА-ЯёЁ][a-zA-Z])|([a-zA-Z][а-яА-ЯёЁ])";
 
-        SqlAnalysisConfiguration sqlAnalysisConfiguration = File.ReadAllText(@"TestData\PrettyNamingRules.txt")
+        SqlAnalysisConfiguration sqlAnalysisConfiguration = File.ReadAllText(@"TestData/PrettyNamingRules.txt")
             .Let(rules => new StringReader(rules))
             .Using(ConfigurationParser.Parse);
 

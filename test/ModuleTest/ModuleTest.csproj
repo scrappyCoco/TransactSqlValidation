@@ -25,25 +25,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <LinkBase>TestData\</LinkBase>
     </None>
-    <None Update="TestData\Rule\StringLiteralRule\CyrillicOnlyDoesNotThrow.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <LinkBase>TestData\</LinkBase>
-    </None>
-    <None Update="TestData\Rule\StringLiteralRule\IgnoredWordsDoesNotThrow.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <LinkBase>TestData\</LinkBase>
-    </None>
-    <None Update="TestData\Rule\StringLiteralRule\LatinOnlyDoesNotThrow.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <LinkBase>TestData\</LinkBase>
-    </None>
-    <None Update="TestData\Rule\StringLiteralRule\MixThrows.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <LinkBase>TestData\</LinkBase>
-    </None>
-    <None Update="TestData\Rule\StringLiteralRule\SeparateWordsAreAllowed.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <LinkBase>TestData\</LinkBase>
-    </None>
   </ItemGroup>
 </Project>

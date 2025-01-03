@@ -13,7 +13,7 @@ namespace Coding4Fun.TransactSql.ModuleTest;
 
 public class RuleTests
 {
-    private const string TestDataRoot = @"TestData\Rule\";
+    private const string TestDataRoot = @"TestData/Rule/";
 
     /// <summary>
     /// Searching for message with expected error message inside a test file.
@@ -45,14 +45,14 @@ public class RuleTests
     private void Test<TRule>(string fileName)
         where TRule : SqlCodeAnalysisRule
     {
-        string sqlFilePath = Path.Combine(TestDataRoot, @$"{typeof(TRule).Name}\{fileName}.sql");
+        string sqlFilePath = Path.Combine(TestDataRoot, @$"{typeof(TRule).Name}/{fileName}.sql");
         string sqlFileContent = File.ReadAllText(sqlFilePath);
 
         TSqlModel sqlModel = new TSqlModel(SqlServerVersion.Sql160, new TSqlModelOptions());
         TSqlObjectOptions sqlObjectOptions = new();
         sqlModel.AddOrUpdateObjects(sqlFileContent, fileName, sqlObjectOptions);
         sqlModel.AddOrUpdateObjects(
-            File.ReadAllText(@".\TestData\SqlAnalysisConfiguration.sql"),
+            File.ReadAllText(@"./TestData/SqlAnalysisConfiguration.sql"),
             "SqlAnalysisConfiguration",
             sqlObjectOptions);
 
