@@ -23,6 +23,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore src/Analyzers/Analyzers.csproj && dotnet restore test/ModuleTest/ModuleTest.csproj
     - name: Build
-      run: dotnet build --no-restore src/Analyzers/Analyzers.csproj&& dotnet build --no-restore test/ModuleTest/ModuleTest.csproj
+      run: dotnet build --no-restore src/Analyzers/Analyzers.csproj && dotnet build --no-restore test/ModuleTest/ModuleTest.csproj
     - name: Test
       run: dotnet test test/ModuleTest/ModuleTest.csproj
