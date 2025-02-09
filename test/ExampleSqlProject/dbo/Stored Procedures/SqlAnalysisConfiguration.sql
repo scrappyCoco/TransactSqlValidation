@@ -2,10 +2,12 @@ CREATE PROCEDURE [dbo].[SqlAnalysisConfiguration]
 AS
 BEGIN
     DECLARE @config NVARCHAR(MAX) = N'
-Coding4Fun.ObjectName.LATIN_UPPER_CASE                = [A-Z][A-Z0-9_]+?;
-Coding4Fun.ObjectName.latin_lower_case                = [a-z][a-z0-9_]+?;
-Coding4Fun.ObjectName.LatinPascalCase                 = [A-Z][A-Za-z0-9]+?;
-Coding4Fun.ObjectName.latinCamelCase                  = [a-z][A-Za-z0-9]+?;
+LatinChar                                             = [a-zA-Z];
+CyrillicChar                                          = [а-яА-ЯёЁ];
+LATIN_UPPER_CASE                                      = [A-Z][A-Z0-9_]+?;
+latin_lower_case                                      = [a-z][a-z0-9_]+?;
+LatinPascalCase                                       = [A-Z][A-Za-z0-9]+?;
+latinCamelCase                                        = [a-z][A-Za-z0-9]+?;
 Coding4Fun.ObjectName.Table                           = ^\[{Schema}\]\.\[P_{LATIN_UPPER_CASE}_S\]$;
 Coding4Fun.ObjectName.Column                          = ^\[{Schema}\]\.\[{Table}\]\.\[{Table}_{LATIN_UPPER_CASE}\]$;
 Coding4Fun.ObjectName.DefaultConstraint               = ^\[{Schema}\]\.\[{Table}\]\.\[{Column}\]\.\[DF_{Column}\]$;
