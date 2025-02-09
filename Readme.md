@@ -229,6 +229,25 @@ ORDER BY MY_TABLE_COLUMN_1,
          MY_TABLE_COLUMN_2;
 ```
 
+### Coding4Fun.SR1006: TOP (N) Requires ORDER BY Clause
+
+This rule searches for variables, that can be assigned with values, but are note used.
+
+Example:
+
+```sql
+CREATE PROCEDURE dbo.AssignedButNotUsed
+AS
+    -- Expected error message: SR1006 : Coding4Fun : Variable @someUsefulValue is defined, but was newer used.
+    DECLARE @someUsefulValue INT = 123;
+
+    -- It writes to variable
+    SELECT @someUsefulValue = 1
+    FROM #MY_TABLE;
+
+    SET @someUsefulValue = 321;
+```
+
 ## Projects Inside this Solution
 
 ### SyntaxTreeExplainer

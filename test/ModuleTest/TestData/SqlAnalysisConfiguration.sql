@@ -26,4 +26,5 @@ Coding4Fun.ObjectName.Variable                        = ^\[{Schema}\]\.\[{LatinP
 Coding4Fun.ObjectName.Function                        = ^\[{Schema}\]\.\[{LatinPascalCase}\]$;
 Coding4Fun.StringLiteral.InvalidWordMixPattern        = ({CyrillicChar}{LatinChar})|({LatinChar}{CyrillicChar})
 ';
+    SELECT @config;
 END
