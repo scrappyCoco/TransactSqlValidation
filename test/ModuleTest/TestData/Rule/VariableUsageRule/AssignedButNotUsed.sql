@@ -1,6 +1,6 @@
 CREATE PROCEDURE dbo.AssignedButNotUsed
 AS
-    -- Expected error message: SR1006 : Coding4Fun : Variable @someUsefulValue is defined, but was newer used.
+    -- Expected error message: SR1006 : Coding4Fun : Variable '@someUsefulValue' is defined, but was newer used
     DECLARE @someUsefulValue INT = 123;
 
     -- It writes to variable
