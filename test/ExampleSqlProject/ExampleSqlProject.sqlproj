@@ -7,8 +7,9 @@
     <ModelCollation>1033, CI</ModelCollation>
     <RunSqlCodeAnalysis>true</RunSqlCodeAnalysis>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <SqlCodeAnalysisRules>+!Coding4Fun.SR1001;+!Coding4Fun.SR1002;+!Coding4Fun.SR1003;+!Coding4Fun.SR1004;+!Coding4Fun.SR1005</SqlCodeAnalysisRules>
-    <ProjectGuid>{00000000-0000-0000-0000-000000000000}</ProjectGuid>
+    <SqlCodeAnalysisRules>+!Coding4Fun.SR1001;+!Coding4Fun.SR1002;+!Coding4Fun.SR1003;+!Coding4Fun.SR1004;+!Coding4Fun.SR1005;+!Coding4Fun.SR1006</SqlCodeAnalysisRules>
+    <ProjectGuid>{afe692bd-5105-43f6-a03f-dba51c4ca219}</ProjectGuid>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Coding4Fun.TransactSql.Analyzers" />
