@@ -14,9 +14,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2EAEB8AD-33CB-46BE-B4E7-2AE10636562E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9A86BBFE-B01D-4441-8D5E-D57AD44D85F0}"
-	ProjectSection(SolutionItems) = preProject
-		test\Debug.ps1 = test\Debug.ps1
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

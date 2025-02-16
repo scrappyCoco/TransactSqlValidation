@@ -41,6 +41,10 @@ public class RuleTests
     [Theory]
     [TestDirectory(TestDataRoot + nameof(TableDescriptionRule))]
     public void TestTableDescriptionRule(string fileName) => Test<TableDescriptionRule>(fileName);
+
+    [Theory]
+    [TestDirectory(TestDataRoot + nameof(VariableUsageRule))]
+    public void TestVariableUsageRule(string fileName) => Test<VariableUsageRule>(fileName);
     
     private void Test<TRule>(string fileName)
         where TRule : SqlCodeAnalysisRule

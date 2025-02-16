@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace Coding4Fun.TransactSql.Analyzers {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -16,7 +19,7 @@ namespace Coding4Fun.TransactSql.Analyzers {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class RuleResources {
@@ -103,7 +106,7 @@ namespace Coding4Fun.TransactSql.Analyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Object name has to include [schema_name] and [object_name], but was: {0}.
+        ///   Looks up a localized string similar to Object name must consists from [schema_name] and [object_name], but was: {0}.
         /// </summary>
         internal static string SchemaRequire_ProblemDescription {
             get {
@@ -130,7 +133,7 @@ namespace Coding4Fun.TransactSql.Analyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to String literal validation.
+        ///   Looks up a localized string similar to String validation.
         /// </summary>
         internal static string StringLiteral_RuleName {
             get {
@@ -162,6 +165,24 @@ namespace Coding4Fun.TransactSql.Analyzers {
         internal static string TableDescription_TableDoesNotContainDescription {
             get {
                 return ResourceManager.GetString("TableDescription_TableDoesNotContainDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variable &apos;{0}&apos; is defined, but was newer used.
+        /// </summary>
+        internal static string VariableUsage_ProblemDescription {
+            get {
+                return ResourceManager.GetString("VariableUsage_ProblemDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VariableUsage_RuleName.
+        /// </summary>
+        internal static string VariableUsage_RuleName {
+            get {
+                return ResourceManager.GetString("VariableUsage_RuleName", resourceCulture);
             }
         }
     }
