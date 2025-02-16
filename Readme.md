@@ -231,7 +231,7 @@ ORDER BY MY_TABLE_COLUMN_1,
 
 ### Coding4Fun.SR1006: TOP (N) Requires ORDER BY Clause
 
-This rule searches for variables, that can be assigned with values, but are note used.
+This rule searches for variables, that can be assigned with values, but are not used.
 
 Example:
 
