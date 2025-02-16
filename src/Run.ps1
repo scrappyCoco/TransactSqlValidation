@@ -9,14 +9,14 @@ dotnet build .\Analyzers\Analyzers.csproj --configuration=Release
 
 # Creating directory with NuGet repository on the local PC for testing purpose
 $nugetSources = dotnet nuget list source --format Short
-if (($nugetSources | ForEach-Object{$_.ToString().EndsWith($targetNuGetPackageSource)}) -contains $true)
+if (($nugetSources | ForEach-Object { $_.ToString().EndsWith($pathToLocalNuGetRepository) }) -contains $true)
 {
     Write-Host "Local NuGet repository already exists"
 }
 else
 {
     Write-Host "Creating local NuGet repository"
-    dotnet nuget add source $pathToLocalNuGetRepository --name $targetNuGetPackageSource
+    dotnet nuget add source $pathToLocalNuGetRepository --name "$targetNuGetPackageSource"
 }
 
 # Removing package from the nuget cache
@@ -35,7 +35,7 @@ if (Test-Path "$pathToLocalNuGetRepository\$nuGetPackageName*")
 
 # Pushing package to the local nuget repository
 Write-Host "Pushing package to the local repository"
-dotnet nuget push ".\Analyzers\bin\Release\$nuGetPackageName.$packageVersion.nupkg" --source $targetNuGetPackageSource
+dotnet nuget push ".\Analyzers\bin\Release\$nuGetPackageName.$packageVersion.nupkg" --source "$targetNuGetPackageSource"
 
 # Building sql project using our analyzers
 dotnet build ..\test\ExampleSqlProject\ExampleSqlProject.sqlproj
