@@ -24,15 +24,31 @@ public class VariableUsageVisitor : SqlVisitorBase
     }
 
     /// <inheritdoc />
-    public override void Visit(VariableReference node)
+    public override void Visit(VariableReference variableReference)
     {
-        if (IsVarUsedForRead(PathContext, node))
+        if (IsVarUsedForRead(PathContext, variableReference))
         {
             const bool usedForWrite = true;
-            _variableName2UsageMark[node.Name] = usedForWrite;
+            _variableName2UsageMark[variableReference.Name] = usedForWrite;
         }
 
-        base.Visit(node);
+        base.Visit(variableReference);
+    }
+
+    /// <inheritdoc />
+    public override void Visit(ProcedureParameter procedureParameter)
+    {
+        // CREATE PROCEDURE dbo.T @i INT OUTPUT
+        // AS
+        // BEGIN
+        //     ...
+        // END
+        if (procedureParameter.Modifier.HasFlag(ParameterModifier.Output))
+        {
+            const bool usedForWrite = true;
+            _variableName2UsageMark[procedureParameter.VariableName.Value] = usedForWrite;
+        }
+        base.Visit(procedureParameter);
     }
 
     [Pure]
@@ -52,7 +68,7 @@ public class VariableUsageVisitor : SqlVisitorBase
             // SELECT @someUsefulValue = 1
             // --     ^ SelectSetVariable ^
             // FROM dbo.MY_TABLE;
-            && !pathContext.Any(ancestor => ancestor is SelectSetVariable) ||
+            && !pathContext.Any(ancestor => ancestor is SelectSetVariable selectSetVariable && selectSetVariable.Variable.Name.Equals(variableReference.Name, StringComparison.InvariantCultureIgnoreCase)) ||
 
             // EXEC #StoredProcedure @someUsefulValue;
             pathContext.Any(ancestor => ancestor is ExecuteStatement) ||
